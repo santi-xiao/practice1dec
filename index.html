@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Luces</title>
+</head>
+<body>
+    <h1 id="title">Juego de Luces - Santiago Xiao Rodríguez López</h1>
+    <div id="body-info">
+        <!--  TODO: añadir número de intentos  -->
+        <p>Número de intentos</p>
+        <!-- TODO: añadir temporizador -->
+        <p>Tiempo transcurrido</p>
+    </div>
+    <div id="body-table">
+        <!-- TODO: hacer el tablero del juego -->
+    </div>
+    <div id="body-settings">
+        <!-- TODO: hacer el cambio de dificultad -->
+        <!-- * personalizacion de la dificultad -->
+        <div id="body-difficulty">
+            <form>
+            <fieldset>
+                <legend>Nivel de dificultad</legend>
+
+                <input type="radio" value="easy" id="easy" name="difficulty">
+                <label for="easy">Fácil</label>
+
+                <input type="radio" value="medium" id="medium" name="difficulty">
+                <label for="easy">Medio</label>
+
+                <input type="radio" value="hard" id="hard" name="difficulty">
+                <label for="easy">Difícil</label>
+
+                <input type="radio" value="personalized" id="personalized" name="difficulty">
+                <label for="easy">Personalizado</label>
+
+            </fieldset>
+        </form>
+        </div>
+        <!-- * personalización del tablero -->
+        <div id="body-ligths">
+            <form>
+            <fieldset>
+                <legend>Número de luces</legend>
+
+                <label for="rows">Filas</label>
+                <input type="number" value="rows" id="rows" name="settings">
+
+                <label for="columns">Columnas</label>
+                <input type="number" value="columns" id="columns" name="settings">
+
+                <label for="ligths">Luces encendidas</label>
+                <input type="number" value="ligths" id="ligths" name="settings">
+
+            </fieldset>
+        </form>
+        </div>
+        <button id="newGame-button" name="newGame-button">Nueva partida</button>
+    </div>
+</body>
+</html>
