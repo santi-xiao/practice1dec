@@ -14,6 +14,7 @@ const createBoard = (rows, columns) => {
   return board;
 };
 
+// * FUNCIONA
 const drawBoard = () => {
   for (let i = 0; i < board.length; i++) {
     let rowDiv = document.createElement("div");
@@ -23,6 +24,8 @@ const drawBoard = () => {
       let square = document.createElement("div");
       square.id = `square${i}-${x}`;
       square.data = off;
+      square.positiony = i;
+      square.positionx = x;
       square.className = "ligthOff";
       square.onclick = switchOnOff;
       rowDiv.appendChild(square);
@@ -30,16 +33,52 @@ const drawBoard = () => {
   }
 };
 
+// * FUNCIONA
 const switchOnOff = (e) => {
-  console.log(e);
   e.target.data == off ? (e.target.data = on) : (e.target.data = off);
-  console.log(e.target.data);
   e.target.data == on
     ? (e.target.className = "ligthOn")
     : (e.target.className = "ligthOff");
+
+  dominoEffect(e);
 };
 
-createBoard(6, 6);
+// TODO : CAMBIAR LOS SQUARES PEGADOS
+const dominoEffect = (e) => {
+  const dominoLigths = [];
+
+  const squareLessX = document.getElementById(
+    `square${e.target.positiony}-${e.target.positionx - 1}`
+  );
+
+  const squareLessY = document.getElementById(
+    `square${e.target.positiony - 1}-${e.target.positionx}`
+  );
+
+  const squarePlusX = document.getElementById(
+    `square${e.target.positiony}-${e.target.positionx + 1}`
+  );
+
+  const squarePlusY = document.getElementById(
+    `square${e.target.positiony + 1}-${e.target.positionx}`
+  );
+
+  dominoLigths.push(squareLessX, squareLessY, squarePlusX, squarePlusY);
+
+  let noNullDominoLigths = dominoLigths.filter((square) => square !== null);
+
+  return dominoSwitch(noNullDominoLigths);
+};
+
+const dominoSwitch = (squares) => {
+  squares.forEach((square) => {
+    square.data == off ? (square.data = on) : (square.data = off);
+    square.data == off
+      ? (square.className = "ligthOff")
+      : (square.className = "ligthOn");
+  });
+  return;
+};
+
+createBoard(5, 4);
 drawBoard();
-console.log(board);
-console.log(board[1][2]);

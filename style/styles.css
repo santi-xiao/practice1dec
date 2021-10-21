@@ -19,12 +19,14 @@
   display: flex;
 }
 #body-board > div > div {
-  border: 1px solid black;
+  /* border: 1px solid white; */
   flex: 1;
 }
 .ligthOff {
-  background-color: blue;
+  background-color: Black;
+  border: 0.5px solid white;
 }
 .ligthOn {
   background-color: yellow;
+  border: 0.5px solid black;
 }
