@@ -3,7 +3,7 @@ const on = 1;
 const board = [];
 const boardID = document.getElementById("body-board");
 
-// Crear tablero
+// * DIBUJA UN BOARD EN EL HTML
 const createBoard = (rows, columns) => {
   for (let i = 0; i < rows; i++) {
     board.push(new Array());
@@ -14,7 +14,7 @@ const createBoard = (rows, columns) => {
   return board;
 };
 
-// * FUNCIONA
+// * DIBUJA EN BOARD LOS CUADRADOS CON SUS PROPIEDADES
 const drawBoard = () => {
   for (let i = 0; i < board.length; i++) {
     let rowDiv = document.createElement("div");
@@ -33,7 +33,7 @@ const drawBoard = () => {
   }
 };
 
-// * FUNCIONA
+// * CAMBIA EL ESTADO DE UN CUADRADO CLICKADO
 const switchOnOff = (e) => {
   e.target.data == off ? (e.target.data = on) : (e.target.data = off);
   e.target.data == on
@@ -43,7 +43,7 @@ const switchOnOff = (e) => {
   dominoEffect(e);
 };
 
-// TODO : CAMBIAR LOS SQUARES PEGADOS
+// * RECOGE LOS CUADRADOS ADYACENTES AL CLICKADO
 const dominoEffect = (e) => {
   const dominoLigths = [];
 
@@ -70,6 +70,7 @@ const dominoEffect = (e) => {
   return dominoSwitch(noNullDominoLigths);
 };
 
+// * CAMBIA EL ESTADO DE UN ARRAY DE CUADRADOS
 const dominoSwitch = (squares) => {
   squares.forEach((square) => {
     square.data == off ? (square.data = on) : (square.data = off);
