@@ -1,7 +1,11 @@
 const off = 0;
 const on = 1;
 const board = [];
+let attempts = 0;
 const boardID = document.getElementById("body-board");
+const attemptsDiv = document.getElementById("attempts");
+const timeMinutesDiv = document.getElementById("time-minutes");
+const timeSecondsDiv = document.getElementById("time-seconds");
 
 // * DIBUJA UN BOARD EN EL HTML
 const createBoard = (rows, columns) => {
@@ -31,6 +35,18 @@ const drawBoard = () => {
       rowDiv.appendChild(square);
     }
   }
+  // * TIMER
+  // let minutes = 0;
+  // let seconds = 0;
+  // setInterval(() => {
+  //   seconds += 1;
+  //   if (seconds === 60) {
+  //     seconds = 0;
+  //     minutes += 1;
+  //   }
+  //   timeMinutesDiv.textContent = minutes;
+  //   timeSecondsDiv.textContent = seconds;
+  // }, 1000);
 };
 
 // * CAMBIA EL ESTADO DE UN CUADRADO CLICKADO
@@ -41,6 +57,8 @@ const switchOnOff = (e) => {
     : (e.target.className = "ligthOff");
 
   dominoEffect(e);
+  attempts += 1;
+  attemptsDiv.textContent = attempts;
 };
 
 // * RECOGE LOS CUADRADOS ADYACENTES AL CLICKADO
@@ -81,5 +99,9 @@ const dominoSwitch = (squares) => {
   return;
 };
 
-createBoard(5, 4);
+// TODO: LUCES INICIALES ALEATORIAS
+
+// TODO: METODO GANADOR
+
+createBoard(2, 2);
 drawBoard();
