@@ -1,11 +1,16 @@
-const off = 0;
-const on = 1;
-const board = [];
-let attempts = 0;
 const boardID = document.getElementById("body-board");
 const attemptsDiv = document.getElementById("attempts");
 const timeMinutesDiv = document.getElementById("time-minutes");
 const timeSecondsDiv = document.getElementById("time-seconds");
+let attempts = 0;
+
+const off = 0;
+const on = 1;
+
+const board = [];
+let startLigths = 10;
+let rows = 2;
+let columns = 2;
 
 // * DIBUJA UN BOARD EN EL HTML
 const createBoard = (rows, columns) => {
@@ -15,6 +20,7 @@ const createBoard = (rows, columns) => {
       board[i].push(off);
     }
   }
+  console.log(board);
   return board;
 };
 
@@ -55,8 +61,13 @@ const switchOnOff = (e) => {
   e.target.data == on
     ? (e.target.className = "ligthOn")
     : (e.target.className = "ligthOff");
+  board[e.target.positiony][e.target.positionx] == 0
+    ? (board[e.target.positiony][e.target.positionx] = 1)
+    : (board[e.target.positiony][e.target.positionx] = 0);
 
+  console.log(board);
   dominoEffect(e);
+  winnerMethod();
   attempts += 1;
   attemptsDiv.textContent = attempts;
 };
@@ -95,13 +106,49 @@ const dominoSwitch = (squares) => {
     square.data == off
       ? (square.className = "ligthOff")
       : (square.className = "ligthOn");
+    board[square.positiony][square.positionx] == 0
+      ? (board[square.positiony][square.positionx] = 1)
+      : (board[square.positiony][square.positionx] = 0);
   });
-  return;
+  console.log(document.getElementById("body-board"));
 };
 
 // TODO: LUCES INICIALES ALEATORIAS
+const initialLigths = (ligths) => {
+  let squares = [];
+  for (let i = 0; i < ligths; i++) {
+    squares.push(
+      document.getElementById(
+        `square${Math.floor(Math.random() * board.length)}-${Math.floor(
+          Math.random() * board[1].length
+        )}`
+      )
+    );
+  }
+  squares.forEach((square) => {
+    square.data = on;
+    square.className = "ligthOn";
+    board[square.positiony][square.positionx] = 1;
+  });
+  console.log(squares);
+};
 
 // TODO: METODO GANADOR
+const winnerMethod = () => {
+  const winscore = rows * columns;
+  let points = 0;
+  board.forEach((row) => {
+    row.forEach((square) => {
+      points += square;
+    });
+  });
+  if (winscore === points) {
+    console.log("You win!");
+    console.log(boardID);
+    boardID.style.pointerEvents = "none";
+  }
+};
 
-createBoard(2, 2);
+createBoard(rows, columns);
 drawBoard();
+initialLigths(startLigths);
