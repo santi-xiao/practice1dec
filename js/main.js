@@ -2,15 +2,67 @@ const boardID = document.getElementById("body-board");
 const attemptsDiv = document.getElementById("attempts");
 const timeMinutesDiv = document.getElementById("time-minutes");
 const timeSecondsDiv = document.getElementById("time-seconds");
-let attempts = 0;
+const radioPersonalized = document.getElementById("personalized");
+const formDifficulty = document.getElementsByName("formDifficulty");
+const formSettings = document.formSettings.settings;
 
+// * Valores apagado, encendido, tablero e intentos
 const off = 0;
 const on = 1;
-
+let attempts = 0;
 const board = [];
+
+// * Valores luces iniciales, filas y columnas
 let startLigths = 10;
 let rows = 2;
 let columns = 2;
+
+// * Nivel de dificultad del juego
+let level = 0;
+
+//  * EVENTO RADIO BUTTONS
+formDifficulty[0].onchange = (e) => {
+  if (e.target.value === "personalized") {
+    formSettings.forEach((element) => {
+      element.disabled = false;
+    });
+  } else {
+    formSettings.forEach((element) => {
+      element.disabled = true;
+    });
+  }
+  level = e.target.value;
+};
+
+// * CAMBIA LAS FILAS Y COLUMNAS SEGUND LA DIFICULTAD
+const changeDifficulty = () => {
+  if (level == "easy") {
+    rows = 5;
+    columns = 5;
+    startLigths = 20;
+  } else if (level == "medium") {
+    rows = 7;
+    columns = 7;
+    startLigths = 15;
+  } else if (level == "hard") {
+    rows = 10;
+    columns = 10;
+    startLigths = 10;
+  } else if (level == "personalized") {
+    if (
+      +document.getElementById("rows").value == 0 ||
+      +document.getElementById("columns").value == 0 ||
+      +document.getElementById("ligths").value == 0
+    ) {
+      alert("Los parámetros pasados son incorrectos");
+      return;
+    }
+
+    rows = +document.getElementById("rows").value;
+    columns = +document.getElementById("columns").value;
+    startLigths = +document.getElementById("ligths").value;
+  }
+};
 
 // * DIBUJA UN BOARD EN EL HTML
 const createBoard = (rows, columns) => {
@@ -113,7 +165,7 @@ const dominoSwitch = (squares) => {
   console.log(document.getElementById("body-board"));
 };
 
-// TODO: LUCES INICIALES ALEATORIAS
+// * LUCES INICIALES ALEATORIAS
 const initialLigths = (ligths) => {
   let squares = [];
   for (let i = 0; i < ligths; i++) {
@@ -133,7 +185,7 @@ const initialLigths = (ligths) => {
   console.log(squares);
 };
 
-// TODO: METODO GANADOR
+// * METODO GANADOR
 const winnerMethod = () => {
   const winscore = rows * columns;
   let points = 0;

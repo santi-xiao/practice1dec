@@ -26,10 +26,10 @@
         <!-- * personalizacion de la dificultad -->
         <div id="body-difficulty">
             <form>
-            <fieldset>
+            <fieldset name="formDifficulty">
                 <legend>Nivel de dificultad</legend>
 
-                <input type="radio" value="easy" id="easy" name="difficulty">
+                <input type="radio" value="easy" id="easy" name="difficulty" checked>
                 <label for="easy">Fácil</label>
 
                 <input type="radio" value="medium" id="medium" name="difficulty">
@@ -46,23 +46,23 @@
         </div>
         <!-- * personalización del tablero -->
         <div id="body-ligths">
-            <form>
+            <form name="formSettings">
             <fieldset>
                 <legend>Número de luces</legend>
 
                 <label for="rows">Filas</label>
-                <input type="number" value="rows" id="rows" name="settings">
+                <input type="number" value="rows" id="rows" name="settings" disabled="true">
 
                 <label for="columns">Columnas</label>
-                <input type="number" value="columns" id="columns" name="settings">
+                <input type="number" value="columns" id="columns" name="settings" disabled="true">
 
                 <label for="ligths">Luces encendidas</label>
-                <input type="number" value="ligths" id="ligths" name="settings">
+                <input type="number" value="ligths" id="ligths" name="settings" disabled="true">
 
             </fieldset>
         </form>
-        <button id="newGame-button" name="newGame-button">Nueva partida</button>
     </div>
+    <button id="newGame-button" name="newGame-button" onclick="changeDifficulty()">Nueva partida</button>
     </div>
     </div>
     <script src="./js/main.js"></script>
