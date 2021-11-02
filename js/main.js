@@ -10,12 +10,12 @@ const formSettings = document.formSettings.settings;
 const off = 0;
 const on = 1;
 let attempts = 0;
-const board = [];
+let board = [];
 
 // * Valores luces iniciales, filas y columnas
-let startLigths = 10;
-let rows = 2;
-let columns = 2;
+let startLigths = 15;
+let rows = 5;
+let columns = 5;
 
 // * Nivel de dificultad del juego
 let level = 0;
@@ -39,11 +39,11 @@ const changeDifficulty = () => {
   if (level == "easy") {
     rows = 5;
     columns = 5;
-    startLigths = 20;
+    startLigths = 15;
   } else if (level == "medium") {
     rows = 7;
     columns = 7;
-    startLigths = 15;
+    startLigths = 12;
   } else if (level == "hard") {
     rows = 10;
     columns = 10;
@@ -62,6 +62,11 @@ const changeDifficulty = () => {
     columns = +document.getElementById("columns").value;
     startLigths = +document.getElementById("ligths").value;
   }
+
+  removeTableBoard();
+  createBoard(rows, columns);
+  drawBoard();
+  initialLigths(startLigths);
 };
 
 // * DIBUJA UN BOARD EN EL HTML
@@ -72,7 +77,7 @@ const createBoard = (rows, columns) => {
       board[i].push(off);
     }
   }
-  console.log(board);
+  console.log("board", board);
   return board;
 };
 
@@ -199,6 +204,12 @@ const winnerMethod = () => {
     console.log(boardID);
     boardID.style.pointerEvents = "none";
   }
+};
+
+// * BORRAR LOS DIVS DEL TABLERO ANTERIOR
+const removeTableBoard = () => {
+  board = [];
+  boardID.innerHTML = "";
 };
 
 createBoard(rows, columns);
