@@ -52,8 +52,13 @@ const changeDifficulty = () => {
   } else if (level == "personalized") {
     if (
       +document.getElementById("rows").value <= 0 ||
+      +document.getElementById("rows").value > 20 ||
       +document.getElementById("columns").value <= 0 ||
-      +document.getElementById("ligths").value < 0
+      +document.getElementById("columns").value > 20 ||
+      +document.getElementById("ligths").value < 0 ||
+      +document.getElementById("ligths").value >=
+        +document.getElementById("rows").value *
+          +document.getElementById("columns").value
     ) {
       alert("Los parámetros pasados son incorrectos");
       return;
