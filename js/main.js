@@ -4,6 +4,7 @@ const timeMinutesDiv = document.getElementById("time-minutes");
 const timeSecondsDiv = document.getElementById("time-seconds");
 const radioPersonalized = document.getElementById("personalized");
 const formDifficulty = document.getElementsByName("formDifficulty");
+const winMessage = document.getElementById("winMessage");
 const formSettings = document.formSettings.settings;
 
 // * Valores apagado, encendido, tablero e intentos
@@ -50,9 +51,9 @@ const changeDifficulty = () => {
     startLigths = 10;
   } else if (level == "personalized") {
     if (
-      +document.getElementById("rows").value == 0 ||
-      +document.getElementById("columns").value == 0 ||
-      +document.getElementById("ligths").value == 0
+      +document.getElementById("rows").value <= 0 ||
+      +document.getElementById("columns").value <= 0 ||
+      +document.getElementById("ligths").value < 0
     ) {
       alert("Los parámetros pasados son incorrectos");
       return;
@@ -67,6 +68,7 @@ const changeDifficulty = () => {
   createBoard(rows, columns);
   drawBoard();
   initialLigths(startLigths);
+  boardID.style.pointerEvents = "";
 };
 
 // * DIBUJA UN BOARD EN EL HTML
@@ -200,9 +202,8 @@ const winnerMethod = () => {
     });
   });
   if (winscore === points) {
-    console.log("You win!");
-    console.log(boardID);
     boardID.style.pointerEvents = "none";
+    winMessage.innerText = "¡Enhorabuena, has ganado!";
   }
 };
 
@@ -210,6 +211,7 @@ const winnerMethod = () => {
 const removeTableBoard = () => {
   board = [];
   boardID.innerHTML = "";
+  winMessage.innerText = "";
 };
 
 createBoard(rows, columns);
