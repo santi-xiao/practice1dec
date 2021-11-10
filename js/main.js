@@ -21,6 +21,11 @@ let columns = 5;
 // * Nivel de dificultad del juego
 let level = 0;
 
+// * Valores timer
+let minutes = 0;
+let seconds = 0;
+let isPaused = false;
+
 //  * EVENTO RADIO BUTTONS
 formDifficulty[0].onchange = (e) => {
   if (e.target.value === "personalized") {
@@ -63,7 +68,6 @@ const changeDifficulty = () => {
       alert("Los parámetros pasados son incorrectos");
       return;
     }
-
     rows = +document.getElementById("rows").value;
     columns = +document.getElementById("columns").value;
     startLigths = +document.getElementById("ligths").value;
@@ -73,7 +77,6 @@ const changeDifficulty = () => {
   createBoard(rows, columns);
   drawBoard();
   initialLigths(startLigths);
-  boardID.style.pointerEvents = "";
 };
 
 // * DIBUJA UN BOARD EN EL HTML
@@ -105,18 +108,6 @@ const drawBoard = () => {
       rowDiv.appendChild(square);
     }
   }
-  // * TIMER
-  // let minutes = 0;
-  // let seconds = 0;
-  // setInterval(() => {
-  //   seconds += 1;
-  //   if (seconds === 60) {
-  //     seconds = 0;
-  //     minutes += 1;
-  //   }
-  //   timeMinutesDiv.textContent = minutes;
-  //   timeSecondsDiv.textContent = seconds;
-  // }, 1000);
 };
 
 // * CAMBIA EL ESTADO DE UN CUADRADO CLICKADO
@@ -135,6 +126,19 @@ const switchOnOff = (e) => {
   attempts += 1;
   attemptsDiv.textContent = attempts;
 };
+
+// * TIMER
+const timerInterval = setInterval(() => {
+  if (!isPaused) {
+    seconds += 1;
+    if (seconds === 60) {
+      seconds = 0;
+      minutes += 1;
+    }
+    timeMinutesDiv.textContent = minutes;
+    timeSecondsDiv.textContent = seconds;
+  }
+}, 1000);
 
 // * RECOGE LOS CUADRADOS ADYACENTES AL CLICKADO
 const dominoEffect = (e) => {
@@ -209,6 +213,7 @@ const winnerMethod = () => {
   if (winscore === points) {
     boardID.style.pointerEvents = "none";
     winMessage.innerText = "¡Enhorabuena, has ganado!";
+    isPaused = true;
   }
 };
 
@@ -217,6 +222,12 @@ const removeTableBoard = () => {
   board = [];
   boardID.innerHTML = "";
   winMessage.innerText = "";
+  attempts = 0;
+  boardID.style.pointerEvents = "";
+  attemptsDiv.textContent = attempts;
+  minutes = 0;
+  seconds = 0;
+  isPaused = false;
 };
 
 createBoard(rows, columns);
