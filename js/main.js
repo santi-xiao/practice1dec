@@ -87,7 +87,6 @@ const createBoard = (rows, columns) => {
       board[i].push(off);
     }
   }
-  console.log("board", board);
   return board;
 };
 
@@ -123,7 +122,6 @@ const switchOnOff = (e) => {
     ? (board[e.target.positiony][e.target.positionx] = 1)
     : (board[e.target.positiony][e.target.positionx] = 0);
 
-  console.log(board);
   dominoEffect(e);
   winnerMethod();
   attempts += 1;
@@ -181,7 +179,6 @@ const dominoSwitch = (squares) => {
       ? (board[square.positiony][square.positionx] = 1)
       : (board[square.positiony][square.positionx] = 0);
   });
-  console.log(document.getElementById("body-board"));
 };
 
 // * LUCES INICIALES ALEATORIAS
@@ -203,7 +200,6 @@ const initialLigths = (ligths) => {
     square.className = "ligthOn";
     board[square.positiony][square.positionx] = 1;
   });
-  console.log(squares);
 };
 
 // * METODO GANADOR
