@@ -43,17 +43,17 @@ formDifficulty[0].onchange = (e) => {
 // * CAMBIA LAS FILAS Y COLUMNAS SEGUND LA DIFICULTAD
 const changeDifficulty = () => {
   if (level == "easy") {
-    rows = 5;
-    columns = 5;
-    startLigths = 15;
+    rows = 2;
+    columns = 2;
+    startLigths = 0;
   } else if (level == "medium") {
-    rows = 7;
-    columns = 7;
-    startLigths = 12;
+    rows = 6;
+    columns = 5;
+    startLigths = 10;
   } else if (level == "hard") {
     rows = 10;
-    columns = 10;
-    startLigths = 10;
+    columns = 9;
+    startLigths = 15;
   } else if (level == "personalized") {
     if (
       +document.getElementById("rows").value <= 0 ||
