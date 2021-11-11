@@ -135,8 +135,8 @@ const timerInterval = setInterval(() => {
       seconds = 0;
       minutes += 1;
     }
-    timeMinutesDiv.textContent = minutes;
-    timeSecondsDiv.textContent = seconds;
+    timeMinutesDiv.textContent = minutes < 10 ? "0" + minutes : minutes;
+    timeSecondsDiv.textContent = seconds < 10 ? "0" + seconds : seconds;
   }
 }, 1000);
 
