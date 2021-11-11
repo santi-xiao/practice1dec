@@ -108,6 +108,9 @@ const drawBoard = () => {
       rowDiv.appendChild(square);
     }
   }
+  document.getElementById("rows").value = rows;
+  document.getElementById("columns").value = columns;
+  document.getElementById("ligths").value = startLigths;
 };
 
 // * CAMBIA EL ESTADO DE UN CUADRADO CLICKADO
