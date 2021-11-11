@@ -14,8 +14,8 @@ let attempts = 0;
 let board = [];
 
 // * Valores luces iniciales, filas y columnas
-let startLigths = 15;
-let rows = 5;
+let startLigths = 10;
+let rows = 6;
 let columns = 5;
 
 // * Nivel de dificultad del juego
@@ -184,14 +184,16 @@ const dominoSwitch = (squares) => {
 // * LUCES INICIALES ALEATORIAS
 const initialLigths = (ligths) => {
   let squares = [];
-  for (let i = 0; i < ligths; i++) {
-    squares.push(
-      document.getElementById(
-        `square${Math.floor(Math.random() * board.length)}-${Math.floor(
-          Math.random() * board[1].length
-        )}`
-      )
+  for (let i = 0; i < ligths; ) {
+    let square = document.getElementById(
+      `square${Math.floor(Math.random() * board.length)}-${Math.floor(
+        Math.random() * board[1].length
+      )}`
     );
+    if (!squares.includes(square)) {
+      squares.push(square);
+      i++;
+    }
   }
   squares.forEach((square) => {
     square.data = on;
